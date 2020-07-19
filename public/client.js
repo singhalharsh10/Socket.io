@@ -16,6 +16,13 @@ function colorTheBox(color) {
 }
 
 document.getElementById('colorIt').onclick = function() {
-    const colour = document.getElementById('selectColor').value
-    colorTheBox(colour)
+    const color = document.getElementById('selectColor').value
+    socket.emit('colorIt', { color }) //here color will contain actual colour
+        // colorTheBox(color)
 }
+
+
+// This is done because our data goes in every tab opened
+socket.on('colorIt', (data) => {
+    colorTheBox(data.color)
+})
